@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     
     bucket = "bishop-industries-terraform-state"
-    key = "liftstatus.tfstate"
+    key = "bish-industries.tfstate"
     region = "eu-west-1"
   }
 
@@ -21,6 +21,6 @@ provider "aws" {
     region = local.aws_region
 }
 
-module "liftstatus" {
+module "common" {
   source = "../../../resources"
 }
