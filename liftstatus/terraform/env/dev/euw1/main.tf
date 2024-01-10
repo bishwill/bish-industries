@@ -20,3 +20,7 @@ terraform {
 provider "aws" {
     region = local.aws_region
 }
+
+module "liftstatus" {
+  source = "../../../resources"
+}
