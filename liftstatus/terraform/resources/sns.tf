@@ -3,9 +3,8 @@ resource "aws_sns_topic" "lift_status" {
 }
 
 
-resource "aws_sns_topic_subscription" "topic_sms_subscription" {
-  count     = length(local.phone_numbers)
+resource "aws_sns_topic_subscription" "email-target" {
   topic_arn = aws_sns_topic.lift_status.arn
-  protocol  = "sms"
-  endpoint  = local.phone_numbers[count.index]
+  protocol  = "email"
+  endpoint  = "will.bishop9427@gmail.com"
 }
