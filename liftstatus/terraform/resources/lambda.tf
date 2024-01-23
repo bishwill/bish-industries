@@ -19,7 +19,7 @@ resource "aws_lambda_function" "lift_status" {
 
   role          = aws_iam_role.iam_for_lambda.arn
 
-  source_code_hash = aws_s3_object.api_code.version_id
+  source_code_hash = aws_s3_object.api_code.source_hash
 
   runtime = "python3.12"
 }
