@@ -1,6 +1,6 @@
 locals {
-  file_path = "../../../../code.zip"
-  s3_object_key = "liftstatus/code.zip"
+  file_path = "../../../../src.zip"
+  s3_object_key = "liftstatus/src.zip"
 }
 
 resource "aws_s3_object" "api_code" {
@@ -12,7 +12,7 @@ resource "aws_s3_object" "api_code" {
 
 resource "aws_lambda_function" "lift_status" {
   function_name = "lift-status"
-  handler = "main.lambda_handler"
+  handler = "src.handlers.hello_world.lambda_handler"
 
   s3_bucket = local.lambda_code_s3_bucket_name
   s3_key = local.s3_object_key

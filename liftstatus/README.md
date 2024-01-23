@@ -1,5 +1,5 @@
 ## To zip up code
 ```bash
-rm code.zip
-zip -r code code
+rm src.zip
+zip -r src src
 ```
