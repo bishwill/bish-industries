@@ -10,8 +10,9 @@ resource "aws_s3_object" "api_code" {
   source_hash = filemd5(local.file_path)
 }
 
-resource "aws_lambda_function" "lift_status" {
-  function_name = "lift-status"
+# lambdas
+resource "aws_lambda_function" "hello_world" {
+  function_name = "hello-world"
   handler = "src.handlers.hello_world.lambda_handler"
 
   s3_bucket = local.lambda_code_s3_bucket_name
@@ -25,21 +26,16 @@ resource "aws_lambda_function" "lift_status" {
 }
 
 
+resource "aws_lambda_function" "lift_status" {
+  function_name = "lift-status"
+  handler = "src.handlers.lift_status.lambda_handler"
 
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect = "Allow"
+  s3_bucket = local.lambda_code_s3_bucket_name
+  s3_key = local.s3_object_key
 
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
+  role          = aws_iam_role.iam_for_lambda.arn
 
-    actions = ["sts:AssumeRole"]
-  }
-}
+  source_code_hash = aws_s3_object.api_code.source_hash
 
-resource "aws_iam_role" "iam_for_lambda" {
-  name               = "iam_for_lambda"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  runtime = "python3.12"
 }
