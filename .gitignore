@@ -38,3 +38,6 @@ terraform.rc
 
 # Mac
 .DS_Store
+
+# python
+*.pyc
